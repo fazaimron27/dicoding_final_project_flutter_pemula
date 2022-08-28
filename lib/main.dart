@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:dicoding_final_project_flutter_pemula/home.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
 
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Lorem Ipsum',
-      theme: ThemeData(),
+      theme: ThemeData(
+        primarySwatch: Colors.blueGrey,
+        brightness: Brightness.dark,
+      ),
+      debugShowCheckedModeBanner: false,
+      home: const Home(),
     );
   }
 }
