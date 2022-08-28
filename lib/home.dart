@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:dicoding_final_project_flutter_pemula/movies.dart';
 import 'package:dicoding_final_project_flutter_pemula/series.dart';
