@@ -1,3 +1,6 @@
+// ignore_for_file: library_private_types_in_public_api
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dicoding_final_project_flutter_pemula/models/series_model.dart';
 
@@ -9,15 +12,229 @@ class DetailSeries extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        return Scaffold(
-          body: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+      builder: (context, constraints) {
+        if (constraints.maxWidth > 800) {
+          return DetailSeriesWeb(series: series);
+        } else {
+          return DetailSeriesMobile(series: series);
+        }
+      },
+    );
+  }
+}
+
+class DetailSeriesMobile extends StatelessWidget {
+  final SeriesModel series;
+
+  const DetailSeriesMobile({Key? key, required this.series}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Stack(
               children: <Widget>[
-                Stack(
-                  children: <Widget>[
-                    Image.asset(series.poster),
+                Image.asset(series.poster),
+                SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: Colors.blueGrey,
+                          child: IconButton(
+                            icon: const Icon(
+                              Icons.close,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 24),
+              child: Text(
+                series.title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 20.0,
+                  fontFamily: 'Roboto',
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.all(15),
+              child: Text(
+                series.plot,
+                textAlign: TextAlign.justify,
+                style: const TextStyle(
+                  fontSize: 16.0,
+                  fontFamily: 'Roboto Italic',
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 10, left: 15),
+              child: Text(
+                "No of episodes: ${series.noOfEpisodes}",
+                textAlign: TextAlign.start,
+                style: const TextStyle(
+                  fontSize: 16.0,
+                  fontFamily: 'Roboto',
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 10, left: 15),
+              child: Text(
+                "No of seasons: ${series.noOfSeasons}",
+                textAlign: TextAlign.start,
+                style: const TextStyle(
+                  fontSize: 16.0,
+                  fontFamily: 'Roboto',
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 10, left: 15),
+              child: Text(
+                "Status: ${series.status}",
+                textAlign: TextAlign.start,
+                style: const TextStyle(
+                  fontSize: 16.0,
+                  fontFamily: 'Roboto',
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 10, left: 15),
+              child: Text(
+                "Genre: ${series.genre}",
+                textAlign: TextAlign.start,
+                style: const TextStyle(
+                  fontSize: 16.0,
+                  fontFamily: 'Roboto',
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 10, left: 15),
+              child: Text(
+                "Relese Date: ${series.releaseDate}",
+                textAlign: TextAlign.start,
+                style: const TextStyle(
+                  fontSize: 16.0,
+                  fontFamily: 'Roboto',
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 10, left: 15),
+              child: Text(
+                "Country: ${series.country}",
+                textAlign: TextAlign.start,
+                style: const TextStyle(
+                  fontSize: 16.0,
+                  fontFamily: 'Roboto',
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 10, left: 15),
+              child: Text(
+                "Director: ${series.director}",
+                textAlign: TextAlign.start,
+                style: const TextStyle(
+                  fontSize: 16.0,
+                  fontFamily: 'Roboto',
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 10, left: 15),
+              child: Text(
+                "Writer: ${series.writer}",
+                textAlign: TextAlign.start,
+                style: const TextStyle(
+                  fontSize: 16.0,
+                  fontFamily: 'Roboto',
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 10, left: 15),
+              child: Text(
+                "Platform: ${series.platform}",
+                textAlign: TextAlign.start,
+                style: const TextStyle(
+                  fontSize: 16.0,
+                  fontFamily: 'Roboto',
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 10, left: 15),
+              child: Text(
+                "Cast: ${series.cast}",
+                textAlign: TextAlign.start,
+                style: const TextStyle(
+                  fontSize: 16.0,
+                  fontFamily: 'Roboto',
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DetailSeriesWeb extends StatefulWidget {
+  final SeriesModel series;
+
+  const DetailSeriesWeb({Key? key, required this.series}) : super(key: key);
+
+  @override
+  _DetailSeriesWebPageState createState() => _DetailSeriesWebPageState();
+}
+
+class _DetailSeriesWebPageState extends State<DetailSeriesWeb> {
+  final _scrollController = ScrollController();
+
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    return Scaffold(
+      appBar: kIsWeb ? null : AppBar(),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: 16,
+          horizontal: 64,
+        ),
+        child: Center(
+          child: SizedBox(
+            width: screenWidth <= 1200 ? 800 : 1200,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const SizedBox(height: 32),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     SafeArea(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -40,146 +257,182 @@ class DetailSeries extends StatelessWidget {
                         ),
                       ),
                     ),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset(widget.series.poster),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 32),
+                    Expanded(
+                      child: Card(
+                        child: Container(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: <Widget>[
+                              Text(
+                                widget.series.title,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 30.0,
+                                  fontFamily: 'Roboto',
+                                ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.only(top: 10),
+                                padding: const EdgeInsets.all(15),
+                                child: Text(
+                                  widget.series.plot,
+                                  textAlign: TextAlign.justify,
+                                  style: const TextStyle(
+                                    fontSize: 16.0,
+                                    fontFamily: 'Roboto Italic',
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin:
+                                    const EdgeInsets.only(top: 10, left: 15),
+                                child: Text(
+                                  "No of episodes: ${widget.series.noOfEpisodes}",
+                                  textAlign: TextAlign.start,
+                                  style: const TextStyle(
+                                    fontSize: 16.0,
+                                    fontFamily: 'Roboto',
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin:
+                                    const EdgeInsets.only(top: 10, left: 15),
+                                child: Text(
+                                  "No of seasons: ${widget.series.noOfSeasons}",
+                                  textAlign: TextAlign.start,
+                                  style: const TextStyle(
+                                    fontSize: 16.0,
+                                    fontFamily: 'Roboto',
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin:
+                                    const EdgeInsets.only(top: 10, left: 15),
+                                child: Text(
+                                  "Status: ${widget.series.status}",
+                                  textAlign: TextAlign.start,
+                                  style: const TextStyle(
+                                    fontSize: 16.0,
+                                    fontFamily: 'Roboto',
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin:
+                                    const EdgeInsets.only(top: 10, left: 15),
+                                child: Text(
+                                  "Genre: ${widget.series.genre}",
+                                  textAlign: TextAlign.start,
+                                  style: const TextStyle(
+                                    fontSize: 16.0,
+                                    fontFamily: 'Roboto',
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin:
+                                    const EdgeInsets.only(top: 10, left: 15),
+                                child: Text(
+                                  "Relese Date: ${widget.series.releaseDate}",
+                                  textAlign: TextAlign.start,
+                                  style: const TextStyle(
+                                    fontSize: 16.0,
+                                    fontFamily: 'Roboto',
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin:
+                                    const EdgeInsets.only(top: 10, left: 15),
+                                child: Text(
+                                  "Country: ${widget.series.country}",
+                                  textAlign: TextAlign.start,
+                                  style: const TextStyle(
+                                    fontSize: 16.0,
+                                    fontFamily: 'Roboto',
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin:
+                                    const EdgeInsets.only(top: 10, left: 15),
+                                child: Text(
+                                  "Director: ${widget.series.director}",
+                                  textAlign: TextAlign.start,
+                                  style: const TextStyle(
+                                    fontSize: 16.0,
+                                    fontFamily: 'Roboto',
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin:
+                                    const EdgeInsets.only(top: 10, left: 15),
+                                child: Text(
+                                  "Writer: ${widget.series.writer}",
+                                  textAlign: TextAlign.start,
+                                  style: const TextStyle(
+                                    fontSize: 16.0,
+                                    fontFamily: 'Roboto',
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin:
+                                    const EdgeInsets.only(top: 10, left: 15),
+                                child: Text(
+                                  "Platform: ${widget.series.platform}",
+                                  textAlign: TextAlign.start,
+                                  style: const TextStyle(
+                                    fontSize: 16.0,
+                                    fontFamily: 'Roboto',
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin:
+                                    const EdgeInsets.only(top: 10, left: 15),
+                                child: Text(
+                                  "Cast: ${widget.series.cast}",
+                                  textAlign: TextAlign.start,
+                                  style: const TextStyle(
+                                    fontSize: 16.0,
+                                    fontFamily: 'Roboto',
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 24),
-                  child: Text(
-                    series.title,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 20.0,
-                      fontFamily: 'Roboto',
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10),
-                  padding: const EdgeInsets.all(15),
-                  child: Text(
-                    series.plot,
-                    textAlign: TextAlign.justify,
-                    style: const TextStyle(
-                      fontSize: 16.0,
-                      fontFamily: 'Roboto Italic',
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10, left: 15),
-                  child: Text(
-                    "No of episodes: ${series.noOfEpisodes}",
-                    textAlign: TextAlign.start,
-                    style: const TextStyle(
-                      fontSize: 16.0,
-                      fontFamily: 'Roboto',
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10, left: 15),
-                  child: Text(
-                    "No of seasons: ${series.noOfSeasons}",
-                    textAlign: TextAlign.start,
-                    style: const TextStyle(
-                      fontSize: 16.0,
-                      fontFamily: 'Roboto',
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10, left: 15),
-                  child: Text(
-                    "Status: ${series.status}",
-                    textAlign: TextAlign.start,
-                    style: const TextStyle(
-                      fontSize: 16.0,
-                      fontFamily: 'Roboto',
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10, left: 15),
-                  child: Text(
-                    "Genre: ${series.genre}",
-                    textAlign: TextAlign.start,
-                    style: const TextStyle(
-                      fontSize: 16.0,
-                      fontFamily: 'Roboto',
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10, left: 15),
-                  child: Text(
-                    "Relese Date: ${series.releaseDate}",
-                    textAlign: TextAlign.start,
-                    style: const TextStyle(
-                      fontSize: 16.0,
-                      fontFamily: 'Roboto',
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10, left: 15),
-                  child: Text(
-                    "Country: ${series.country}",
-                    textAlign: TextAlign.start,
-                    style: const TextStyle(
-                      fontSize: 16.0,
-                      fontFamily: 'Roboto',
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10, left: 15),
-                  child: Text(
-                    "Director: ${series.director}",
-                    textAlign: TextAlign.start,
-                    style: const TextStyle(
-                      fontSize: 16.0,
-                      fontFamily: 'Roboto',
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10, left: 15),
-                  child: Text(
-                    "Writer: ${series.writer}",
-                    textAlign: TextAlign.start,
-                    style: const TextStyle(
-                      fontSize: 16.0,
-                      fontFamily: 'Roboto',
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10, left: 15),
-                  child: Text(
-                    "Platform: ${series.platform}",
-                    textAlign: TextAlign.start,
-                    style: const TextStyle(
-                      fontSize: 16.0,
-                      fontFamily: 'Roboto',
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10, left: 15),
-                  child: Text(
-                    "Cast: ${series.cast}",
-                    textAlign: TextAlign.start,
-                    style: const TextStyle(
-                      fontSize: 16.0,
-                      fontFamily: 'Roboto',
-                    ),
-                  ),
                 ),
               ],
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 }
