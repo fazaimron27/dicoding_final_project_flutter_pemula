@@ -179,17 +179,10 @@ class DetailMovieMobile extends StatelessWidget {
   }
 }
 
-class DetailMovieWeb extends StatefulWidget {
+class DetailMovieWeb extends StatelessWidget {
   final MoviesModel movie;
 
   const DetailMovieWeb({Key? key, required this.movie}) : super(key: key);
-
-  @override
-  _DetailMovieWebPageState createState() => _DetailMovieWebPageState();
-}
-
-class _DetailMovieWebPageState extends State<DetailMovieWeb> {
-  final _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -239,7 +232,7 @@ class _DetailMovieWebPageState extends State<DetailMovieWeb> {
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(10),
-                            child: Image.asset(widget.movie.poster),
+                            child: Image.asset(movie.poster),
                           ),
                         ],
                       ),
@@ -253,7 +246,7 @@ class _DetailMovieWebPageState extends State<DetailMovieWeb> {
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               Text(
-                                widget.movie.title,
+                                movie.title,
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                   fontSize: 30.0,
@@ -264,7 +257,7 @@ class _DetailMovieWebPageState extends State<DetailMovieWeb> {
                                 margin: const EdgeInsets.only(top: 10),
                                 padding: const EdgeInsets.all(15),
                                 child: Text(
-                                  widget.movie.plot,
+                                  movie.plot,
                                   textAlign: TextAlign.justify,
                                   style: const TextStyle(
                                     fontSize: 16.0,
@@ -276,7 +269,7 @@ class _DetailMovieWebPageState extends State<DetailMovieWeb> {
                                 margin:
                                     const EdgeInsets.only(top: 10, left: 15),
                                 child: Text(
-                                  "Genre: ${widget.movie.genre}",
+                                  "Genre: ${movie.genre}",
                                   textAlign: TextAlign.start,
                                   style: const TextStyle(
                                     fontSize: 16.0,
@@ -288,7 +281,7 @@ class _DetailMovieWebPageState extends State<DetailMovieWeb> {
                                 margin:
                                     const EdgeInsets.only(top: 10, left: 15),
                                 child: Text(
-                                  "Duration: ${widget.movie.duration}",
+                                  "Duration: ${movie.duration}",
                                   textAlign: TextAlign.start,
                                   style: const TextStyle(
                                     fontSize: 16.0,
@@ -300,7 +293,7 @@ class _DetailMovieWebPageState extends State<DetailMovieWeb> {
                                 margin:
                                     const EdgeInsets.only(top: 10, left: 15),
                                 child: Text(
-                                  "Relese Date: ${widget.movie.releaseDate}",
+                                  "Relese Date: ${movie.releaseDate}",
                                   textAlign: TextAlign.start,
                                   style: const TextStyle(
                                     fontSize: 16.0,
@@ -312,7 +305,7 @@ class _DetailMovieWebPageState extends State<DetailMovieWeb> {
                                 margin:
                                     const EdgeInsets.only(top: 10, left: 15),
                                 child: Text(
-                                  "Country: ${widget.movie.country}",
+                                  "Country: ${movie.country}",
                                   textAlign: TextAlign.start,
                                   style: const TextStyle(
                                     fontSize: 16.0,
@@ -324,7 +317,7 @@ class _DetailMovieWebPageState extends State<DetailMovieWeb> {
                                 margin:
                                     const EdgeInsets.only(top: 10, left: 15),
                                 child: Text(
-                                  "Director: ${widget.movie.director}",
+                                  "Director: ${movie.director}",
                                   textAlign: TextAlign.start,
                                   style: const TextStyle(
                                     fontSize: 16.0,
@@ -336,7 +329,7 @@ class _DetailMovieWebPageState extends State<DetailMovieWeb> {
                                 margin:
                                     const EdgeInsets.only(top: 10, left: 15),
                                 child: Text(
-                                  "Writer: ${widget.movie.writer}",
+                                  "Writer: ${movie.writer}",
                                   textAlign: TextAlign.start,
                                   style: const TextStyle(
                                     fontSize: 16.0,
@@ -348,7 +341,7 @@ class _DetailMovieWebPageState extends State<DetailMovieWeb> {
                                 margin:
                                     const EdgeInsets.only(top: 10, left: 15),
                                 child: Text(
-                                  "Platform: ${widget.movie.platform}",
+                                  "Platform: ${movie.platform}",
                                   textAlign: TextAlign.start,
                                   style: const TextStyle(
                                     fontSize: 16.0,
@@ -360,7 +353,7 @@ class _DetailMovieWebPageState extends State<DetailMovieWeb> {
                                 margin:
                                     const EdgeInsets.only(top: 10, left: 15),
                                 child: Text(
-                                  "Cast: ${widget.movie.cast}",
+                                  "Cast: ${movie.cast}",
                                   textAlign: TextAlign.start,
                                   style: const TextStyle(
                                     fontSize: 16.0,
@@ -381,11 +374,5 @@ class _DetailMovieWebPageState extends State<DetailMovieWeb> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
   }
 }

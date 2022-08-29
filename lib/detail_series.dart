@@ -202,17 +202,10 @@ class DetailSeriesMobile extends StatelessWidget {
   }
 }
 
-class DetailSeriesWeb extends StatefulWidget {
+class DetailSeriesWeb extends StatelessWidget {
   final SeriesModel series;
 
   const DetailSeriesWeb({Key? key, required this.series}) : super(key: key);
-
-  @override
-  _DetailSeriesWebPageState createState() => _DetailSeriesWebPageState();
-}
-
-class _DetailSeriesWebPageState extends State<DetailSeriesWeb> {
-  final _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -262,7 +255,7 @@ class _DetailSeriesWebPageState extends State<DetailSeriesWeb> {
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(10),
-                            child: Image.asset(widget.series.poster),
+                            child: Image.asset(series.poster),
                           ),
                         ],
                       ),
@@ -276,7 +269,7 @@ class _DetailSeriesWebPageState extends State<DetailSeriesWeb> {
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               Text(
-                                widget.series.title,
+                                series.title,
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                   fontSize: 30.0,
@@ -287,7 +280,7 @@ class _DetailSeriesWebPageState extends State<DetailSeriesWeb> {
                                 margin: const EdgeInsets.only(top: 10),
                                 padding: const EdgeInsets.all(15),
                                 child: Text(
-                                  widget.series.plot,
+                                  series.plot,
                                   textAlign: TextAlign.justify,
                                   style: const TextStyle(
                                     fontSize: 16.0,
@@ -299,7 +292,7 @@ class _DetailSeriesWebPageState extends State<DetailSeriesWeb> {
                                 margin:
                                     const EdgeInsets.only(top: 10, left: 15),
                                 child: Text(
-                                  "No of episodes: ${widget.series.noOfEpisodes}",
+                                  "No of episodes: ${series.noOfEpisodes}",
                                   textAlign: TextAlign.start,
                                   style: const TextStyle(
                                     fontSize: 16.0,
@@ -311,7 +304,7 @@ class _DetailSeriesWebPageState extends State<DetailSeriesWeb> {
                                 margin:
                                     const EdgeInsets.only(top: 10, left: 15),
                                 child: Text(
-                                  "No of seasons: ${widget.series.noOfSeasons}",
+                                  "No of seasons: ${series.noOfSeasons}",
                                   textAlign: TextAlign.start,
                                   style: const TextStyle(
                                     fontSize: 16.0,
@@ -323,7 +316,7 @@ class _DetailSeriesWebPageState extends State<DetailSeriesWeb> {
                                 margin:
                                     const EdgeInsets.only(top: 10, left: 15),
                                 child: Text(
-                                  "Status: ${widget.series.status}",
+                                  "Status: ${series.status}",
                                   textAlign: TextAlign.start,
                                   style: const TextStyle(
                                     fontSize: 16.0,
@@ -335,7 +328,7 @@ class _DetailSeriesWebPageState extends State<DetailSeriesWeb> {
                                 margin:
                                     const EdgeInsets.only(top: 10, left: 15),
                                 child: Text(
-                                  "Genre: ${widget.series.genre}",
+                                  "Genre: ${series.genre}",
                                   textAlign: TextAlign.start,
                                   style: const TextStyle(
                                     fontSize: 16.0,
@@ -347,7 +340,7 @@ class _DetailSeriesWebPageState extends State<DetailSeriesWeb> {
                                 margin:
                                     const EdgeInsets.only(top: 10, left: 15),
                                 child: Text(
-                                  "Relese Date: ${widget.series.releaseDate}",
+                                  "Relese Date: ${series.releaseDate}",
                                   textAlign: TextAlign.start,
                                   style: const TextStyle(
                                     fontSize: 16.0,
@@ -359,7 +352,7 @@ class _DetailSeriesWebPageState extends State<DetailSeriesWeb> {
                                 margin:
                                     const EdgeInsets.only(top: 10, left: 15),
                                 child: Text(
-                                  "Country: ${widget.series.country}",
+                                  "Country: ${series.country}",
                                   textAlign: TextAlign.start,
                                   style: const TextStyle(
                                     fontSize: 16.0,
@@ -371,7 +364,7 @@ class _DetailSeriesWebPageState extends State<DetailSeriesWeb> {
                                 margin:
                                     const EdgeInsets.only(top: 10, left: 15),
                                 child: Text(
-                                  "Director: ${widget.series.director}",
+                                  "Director: ${series.director}",
                                   textAlign: TextAlign.start,
                                   style: const TextStyle(
                                     fontSize: 16.0,
@@ -383,7 +376,7 @@ class _DetailSeriesWebPageState extends State<DetailSeriesWeb> {
                                 margin:
                                     const EdgeInsets.only(top: 10, left: 15),
                                 child: Text(
-                                  "Writer: ${widget.series.writer}",
+                                  "Writer: ${series.writer}",
                                   textAlign: TextAlign.start,
                                   style: const TextStyle(
                                     fontSize: 16.0,
@@ -395,7 +388,7 @@ class _DetailSeriesWebPageState extends State<DetailSeriesWeb> {
                                 margin:
                                     const EdgeInsets.only(top: 10, left: 15),
                                 child: Text(
-                                  "Platform: ${widget.series.platform}",
+                                  "Platform: ${series.platform}",
                                   textAlign: TextAlign.start,
                                   style: const TextStyle(
                                     fontSize: 16.0,
@@ -407,7 +400,7 @@ class _DetailSeriesWebPageState extends State<DetailSeriesWeb> {
                                 margin:
                                     const EdgeInsets.only(top: 10, left: 15),
                                 child: Text(
-                                  "Cast: ${widget.series.cast}",
+                                  "Cast: ${series.cast}",
                                   textAlign: TextAlign.start,
                                   style: const TextStyle(
                                     fontSize: 16.0,
@@ -428,11 +421,5 @@ class _DetailSeriesWebPageState extends State<DetailSeriesWeb> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
   }
 }
